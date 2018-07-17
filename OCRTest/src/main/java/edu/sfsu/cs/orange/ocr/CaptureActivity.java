@@ -669,6 +669,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
     // If our language doesn't support Cube, then set the ocrEngineMode to Tesseract
     if (ocrEngineMode != TessBaseAPI.OEM_TESSERACT_ONLY) {
+      Log.e("chinese", "Tesseract only:"+languageCode);
       boolean cubeOk = false;
       for (String s : CUBE_SUPPORTED_LANGUAGES) {
         if (s.equals(languageCode)) {
