@@ -123,4 +123,5 @@ public class ShutterButton extends ImageView {
 		 }
 		 return result;
 	 }
+
 }

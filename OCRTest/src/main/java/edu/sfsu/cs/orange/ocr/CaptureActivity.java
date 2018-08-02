@@ -752,50 +752,96 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     TextView sourceLanguageTextView = (TextView) findViewById(R.id.source_language_text_view);
     sourceLanguageTextView.setText(sourceLanguageReadable);
     TextView ocrResultTextView = (TextView) findViewById(R.id.ocr_result_text_view);
-    ocrResultTextView.setText(ocrResult.getText());
-    // Crudely scale betweeen 22 and 32 -- bigger font for shorter text
-    int scaledSize = Math.max(22, 32 - ocrResult.getText().length() / 4);
-    ocrResultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
-
+//    ocrResultTextView.setText(ocrResult.getText());
+//    // Crudely scale betweeen 22 and 32 -- bigger font for shorter text
+//    int scaledSize = Math.max(22, 32 - ocrResult.getText().length() / 4);
+//    ocrResultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
+//
     TextView translationLanguageLabelTextView = (TextView) findViewById(R.id.translation_language_label_text_view);
     TextView translationLanguageTextView = (TextView) findViewById(R.id.translation_language_text_view);
     TextView translationTextView = (TextView) findViewById(R.id.translation_text_view);
-    if (isTranslationActive) {
-      // Handle translation text fields
-      translationLanguageLabelTextView.setVisibility(View.VISIBLE);
-      translationLanguageTextView.setText(targetLanguageReadable);
-      translationLanguageTextView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
-      translationLanguageTextView.setVisibility(View.VISIBLE);
+//    if (isTranslationActive) {
+//      // Handle translation text fields
+//      translationLanguageLabelTextView.setVisibility(View.VISIBLE);
+//      translationLanguageTextView.setText(targetLanguageReadable);
+//      translationLanguageTextView.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
+//      translationLanguageTextView.setVisibility(View.VISIBLE);
+//
+//      // Activate/re-activate the indeterminate progress indicator
+//      translationTextView.setVisibility(View.GONE);
+//      progressView.setVisibility(View.VISIBLE);
+//      setProgressBarVisibility(true);
+//
+//      // Get the translation asynchronously
+//      new TranslateAsyncTask(this, sourceLanguageCodeTranslation, targetLanguageCodeTranslation,
+//          ocrResult.getText()).execute();
+//    } else {
+//      translationLanguageLabelTextView.setVisibility(View.GONE);
+//      translationLanguageTextView.setVisibility(View.GONE);
+//      translationTextView.setVisibility(View.GONE);
+//      progressView.setVisibility(View.GONE);
+//      setProgressBarVisibility(false);
+//    }
 
-      // Activate/re-activate the indeterminate progress indicator
-      translationTextView.setVisibility(View.GONE);
-      progressView.setVisibility(View.VISIBLE);
-      setProgressBarVisibility(true);
-      
-      // Get the translation asynchronously
-      new TranslateAsyncTask(this, sourceLanguageCodeTranslation, targetLanguageCodeTranslation, 
-          ocrResult.getText()).execute();
-    } else {
-      translationLanguageLabelTextView.setVisibility(View.GONE);
-      translationLanguageTextView.setVisibility(View.GONE);
-      translationTextView.setVisibility(View.GONE);
-      progressView.setVisibility(View.GONE);
-      setProgressBarVisibility(false);
-    }
+    //feng ----added to diplay test
+            String text =   "文本检测："+ ocrResult.getText();
+            String displayText = "";
+            if(text.contains("短期借款")){
+                           displayText = "【中财国培】\n" +
+                                                       "【单选题】\n" +
+                                                       "以下属于M公司短期借款的是（）。\n" +
+                                                       "A.向银行借入的期限为1.5年的借款\n" +
+                                                       "B.向其他金融机构借入的期限为1年的借款\n" +
+                                                       "C.向银行借入的期限为3年的借款\n" +
+                                                       "D.向其他金融机构借入的期限为2年的借款\n" +
+                                                       "【答案】B\n" +
+                                                       "【解析】短期借款是指企业向银行或其他金融机构等借入的期限在1年以下（含1年）的各种借款。\n" +
+                                                       "【难度】易\n" +
+                                                       "【知识点】第一节 短期借款\n" +
+                                                       "【关键词】短期借款";
+
+            }else if(text.contains("应付及预收款项")) {
+                 displayText =     	 "中财国培】\n"+
+                    "【多选题】\n"+
+                    "下列关于应付票据的说法中，正确的有（）。\n"+
+                    "A.应付票据包括银行汇票和银行本票\n"+
+                    "B.应付票据到期结清时，应当在备查簿内予以注销\n"+
+                    "C.应付票据余额在借方，表示企业尚未到期的商业汇票的票面金额和应计未付的利息\n"+
+                    "D.商业汇票按照是否带息，分为带息票据和不带息票据\n"+
+                    "【答案】BD\n"+
+                    "【解析】选项A，应付票据包括商业承兑汇票和银行承兑汇票；选项C应付票据余额在贷方，表示企业尚未到期的商业汇票的票面金额和应计未付的利息。\n"+
+                    "【难度】中\n"+
+                    "【知识点】第二节 应付及预收款项\n"+
+                    "【关键词】应付票据" ;
+            }
+            ocrResultTextView.setText(text+"\n" + displayText);
+            int scaledSize = 14;//Math.max(22, 32 - ocrResult.getText().length() / 4);
+            ocrResultTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, scaledSize);
+            translationLanguageLabelTextView.setVisibility(View.GONE);
+            translationLanguageTextView.setVisibility(View.GONE);
+            translationTextView.setVisibility(View.GONE);
+            progressView.setVisibility(View.GONE);
+            setProgressBarVisibility(false);
+            viewfinderView.setVisibility(View.VISIBLE);
+            shutterButton.setVisibility(View.VISIBLE);
+            shutterButton.bringToFront();
+            cameraButtonView.setVisibility(View.VISIBLE);
+            viewfinderView.bringToFront();
+            cameraButtonView.bringToFront();
     return true;
   }
-  
+
   /**
    * Displays information relating to the results of a successful real-time OCR request.
-   * 
+   *
    * @param ocrResult Object representing successful OCR results
    */
   void handleOcrContinuousDecode(OcrResult ocrResult) {
-   
+
     lastResult = ocrResult;
-    
+
     // Send an OcrResultText object to the ViewfinderView for text rendering
-    viewfinderView.addResultText(new OcrResultText(ocrResult.getText(), 
+    viewfinderView.addResultText(new OcrResultText(ocrResult.getText(),
                                                    ocrResult.getWordConfidences(),
                                                    ocrResult.getMeanConfidence(),
                                                    ocrResult.getBitmapDimensions(),
